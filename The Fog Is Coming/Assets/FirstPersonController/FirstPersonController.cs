@@ -33,9 +33,9 @@ public class FirstPersonController : MonoBehaviour
 
     [Header("Headbob Parameters")]
     [SerializeField] private float walkBobSpeed = 14f;
-    [SerializeField] private float walkBobAmount = 0.5f;
+    [SerializeField] private float walkBobAmount = 0.05f;
     [SerializeField] private float sprintBobSpeed = 18f;
-    [SerializeField] private float sprintBobAmount = 1f;
+    [SerializeField] private float sprintBobAmount = 0.1f;
     private float defaultYPos = 0;
     private float timer;
 
