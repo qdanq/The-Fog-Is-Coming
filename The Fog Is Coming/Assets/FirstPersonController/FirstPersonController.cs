@@ -52,6 +52,7 @@ public class FirstPersonController : MonoBehaviour
     {
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();        
+        defaultYPos = playerCamera.transform.localPosition.y;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -94,9 +95,19 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleHeadBob() 
     {
-        
+        if (!characterController.isGrounded) return;
+
+        if (Mathf.Abs(moveDirection.x) > 0.1f || Mathf.Abs(moveDirection.z) > 0.1f) 
+        {
+            timer += Time.deltaTime * (isSprinting ? sprintBobSpeed : walkBobSpeed);
+            playerCamera.transform.localPosition = new Vector3(
+                playerCamera.transform.localPosition.x,
+                defaultYPos + Mathf.Sin(timer) * (isSprinting ? sprintBobAmount : walkBobAmount),
+                playerCamera.transform.localPosition.z
+            );
+        }
     }
-    
+
     private void AplyFinalMovements()
     {
         if (!characterController.isGrounded) 
