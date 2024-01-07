@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FirstPersonController : MonoBehaviour
 {
+    public bool CanMove { 
+        get;
+        private set;
+        } = true;
     // Start is called before the first frame update
     void Start()
     {
