@@ -14,6 +14,8 @@ public class FirstPersonController : MonoBehaviour
 
     [Header("Functional Options")]
     [SerializeField] private bool canSprint = true;
+    [SerializeField] private bool isHeadBobbing = true;
+
 
     [Header("Controls")]
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
@@ -28,6 +30,15 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField, Range(1, 10)] private float lookSpeedY = 2.0f; // Must be accessible from options
     [SerializeField, Range(1, 180)] private float upLookLimit = 80.0f;
     [SerializeField, Range(1, 180)] private float downLookLimit = 80.0f;
+
+    [Header("Headbob Parameters")]
+    [SerializeField] private float walkBobSpeed = 14f;
+    [SerializeField] private float walkBobAmount = 0.5f;
+    [SerializeField] private float sprintBobSpeed = 18f;
+    [SerializeField] private float sprintBobAmount = 1f;
+    private float defaultYPos = 0;
+    private float timer;
+
 
     private Camera playerCamera;
     private CharacterController characterController;
@@ -54,6 +65,11 @@ public class FirstPersonController : MonoBehaviour
 
             AplyFinalMovements();
         }
+
+        if (isHeadBobbing) 
+        {
+            HandleHeadBob();
+        }
     }
 
     private void HandleMovementInput()
@@ -75,6 +91,12 @@ public class FirstPersonController : MonoBehaviour
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeedX, 0);
     }
+
+    private void HandleHeadBob() 
+    {
+        
+    }
+    
     private void AplyFinalMovements()
     {
         if (!characterController.isGrounded) 
@@ -83,4 +105,5 @@ public class FirstPersonController : MonoBehaviour
         }
         characterController.Move(moveDirection * Time.deltaTime);
     }
+
 }
