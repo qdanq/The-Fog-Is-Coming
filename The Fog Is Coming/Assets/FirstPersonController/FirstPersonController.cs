@@ -61,7 +61,10 @@ public class FirstPersonController : MonoBehaviour
     }
     private void HandleMouseLock()
     {
-        
+        rotationX -= Input.GetAxis("Mouse Y") * lookSpeedY;
+        rotationX = Mathf.Clamp(rotationX, -upLookLimit, downLookLimit);
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeedX, 0);
     }
     private void AplyFinalMovements()
     {
