@@ -460,12 +460,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f851e29a4b55742b03c2d9db812393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canSprint: 1
+  isHeadBobbing: 1
+  sprintKey: 304
   walkSpeed: 3
+  sprintSpeed: 6
   gravity: 30
   lookSpeedX: 2
   lookSpeedY: 2
   upLookLimit: 80
   downLookLimit: 80
+  walkBobSpeed: 14
+  walkBobAmount: 0.05
+  sprintBobSpeed: 18
+  sprintBobAmount: 0.1
 --- !u!143 &808098446
 CharacterController:
   m_ObjectHideFlags: 0
