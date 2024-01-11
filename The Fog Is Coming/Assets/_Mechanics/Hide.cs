@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerHide : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject hideText, stopHideText;
+    
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
