@@ -44,9 +44,9 @@ public class PlayerHide : MonoBehaviour
                 isInteractable = false;
             }
         }
-        if(isHiding)
+        else if(isHiding)
         {
-            if(Input.GetKeyDown(KeyCode.Q))
+            if(Input.GetKeyDown(KeyCode.E))
             {
                 stopHideText.SetActive(false);
                 normalPlayer.SetActive(true);
