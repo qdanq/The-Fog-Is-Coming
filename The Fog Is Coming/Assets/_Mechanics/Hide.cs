@@ -12,7 +12,7 @@ public class PlayerHide : MonoBehaviour
         if(other.CompareTag("MainCamera"))
         {
             hideText.SetActive(true);
-            isInteractable = true;
+            isInteractable = true;  
         }
     }
     void OnTriggerExit(Collider other) 
@@ -46,7 +46,7 @@ public class PlayerHide : MonoBehaviour
         }
         if(isHiding)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKeyDown(KeyCode.Q))
             {
                 stopHideText.SetActive(false);
                 normalPlayer.SetActive(true);
