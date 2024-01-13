@@ -735,8 +735,10 @@ MonoBehaviour:
   gravity: 30
   lookSpeedX: 2
   lookSpeedY: 2
-  upLookLimit: 80
-  downLookLimit: 80
+  upLookLimit: 90
+  downLookLimit: 90
+  rightLookLimit: 180
+  leftLookLimit: 180
   walkBobSpeed: 14
   walkBobAmount: 0.05
   sprintBobSpeed: 18
@@ -938,7 +940,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1188672765}
   - component: {fileID: 1188672767}
-  - component: {fileID: 1188672766}
   m_Layer: 0
   m_Name: PlayerHidePos
   m_TagString: Untagged
@@ -962,32 +963,6 @@ Transform:
   - {fileID: 1485306808}
   m_Father: {fileID: 448866478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1188672766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1188672764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90f851e29a4b55742b03c2d9db812393, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canSprint: 1
-  isHeadBobbing: 1
-  sprintKey: 304
-  walkSpeed: 0
-  sprintSpeed: 0
-  gravity: 30
-  lookSpeedX: 2
-  lookSpeedY: 2
-  upLookLimit: 80
-  downLookLimit: 80
-  walkBobSpeed: 14
-  walkBobAmount: 0.05
-  sprintBobSpeed: 18
-  sprintBobAmount: 0.1
 --- !u!143 &1188672767
 CharacterController:
   m_ObjectHideFlags: 0
