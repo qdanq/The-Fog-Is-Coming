@@ -716,6 +716,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7824753648676844136, guid: d43204824f12ca748a0f5508d1ecff67, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.21840818
+      objectReference: {fileID: 0}
+    - target: {fileID: -7824753648676844136, guid: d43204824f12ca748a0f5508d1ecff67, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.875
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d43204824f12ca748a0f5508d1ecff67, type: 3}
       propertyPath: m_Name
       value: Bed01
@@ -942,6 +950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canSprint: 1
   isHeadBobbing: 1
+  useStamina: 1
   sprintKey: 304
   walkSpeed: 3
   sprintSpeed: 6
@@ -951,9 +960,15 @@ MonoBehaviour:
   upLookLimit: 90
   downLookLimit: 90
   walkBobSpeed: 14
-  walkBobAmount: 0.05
+  walkBobAmount: 0.04
   sprintBobSpeed: 18
-  sprintBobAmount: 0.1
+  sprintBobAmount: 0.08
+  maxStamina: 100
+  staminaUseMultiplier: 10
+  timeBeforeStaminaRegenStarts: 5
+  staminaValueIncrement: 2
+  staminaTimeIncrement: 0.1
+  minStaminaToSprint: 5
 --- !u!143 &808098446
 CharacterController:
   m_ObjectHideFlags: 0

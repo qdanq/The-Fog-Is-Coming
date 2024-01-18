@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class FirstPersonController : MonoBehaviour
     [Header("Functional Options")]
     [SerializeField] private bool canSprint = true;
     [SerializeField] private bool isHeadBobbing = true;
+    [SerializeField] private bool useStamina = true;
 
 
     [Header("Controls")]
@@ -36,6 +38,18 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float walkBobAmount = 0.05f;
     [SerializeField] private float sprintBobSpeed = 18f;
     [SerializeField] private float sprintBobAmount = 0.1f;
+
+    [Header("Stamina Parameters")]
+    [SerializeField] private float maxStamina = 100;
+    [SerializeField] private float staminaUseMultiplier = 5;
+    [SerializeField] private float timeBeforeStaminaRegenStarts = 4.0f;
+    [SerializeField] private float staminaValueIncrement = 2;
+    [SerializeField] private float staminaTimeIncrement = 0.1f;
+    [SerializeField] private float minStaminaToSprint = 5;
+    private float currentStamina;
+    private Coroutine regeneratingStamina;
+    public static Action<float> OnStaminaChange;
+
     private float defaultYPos = 0;
     private float timer;
 
@@ -70,6 +84,11 @@ public class FirstPersonController : MonoBehaviour
         if (isHeadBobbing) 
         {
             HandleHeadBob();
+        }
+
+        if (useStamina)
+        {
+            HandleStamina();
         }
     }
 
@@ -108,6 +127,35 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
+    private void HandleStamina()
+    {
+        if (isSprinting && currentInput != Vector2.zero) // Vector2.zero for check if player  moves
+        {
+            if (regeneratingStamina != null)
+            {
+                StopCoroutine(regeneratingStamina);
+                regeneratingStamina = null;
+            }
+            currentStamina -= staminaUseMultiplier * Time.deltaTime; // deltaTime for every second
+
+            if (currentStamina < 0) 
+            {
+                currentStamina = 0;
+            }
+
+            OnStaminaChange?.Invoke(currentStamina);
+
+            if (currentStamina <= 0)
+            {
+                canSprint = false;
+            }
+        }
+        if (!isSprinting && currentStamina < maxStamina && regeneratingStamina == null)
+        {
+            regeneratingStamina = StartCoroutine(RegenerateStamina());
+        }
+    }
+
     private void AplyFinalMovements()
     {
         if (!characterController.isGrounded) 
@@ -117,4 +165,29 @@ public class FirstPersonController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
+
+    private IEnumerator RegenerateStamina()
+    {
+        yield return new WaitForSeconds(timeBeforeStaminaRegenStarts);
+        WaitForSeconds timeToWait = new WaitForSeconds(staminaTimeIncrement);
+
+        while (currentStamina < maxStamina)
+        {
+            if (currentStamina >= minStaminaToSprint)
+            {
+                canSprint = true;
+            }
+            currentStamina += staminaValueIncrement;
+
+            if (currentStamina > maxStamina)
+            {
+                currentStamina = maxStamina;
+            }
+
+            OnStaminaChange?.Invoke(currentStamina);
+
+            yield return timeToWait;
+        }
+        regeneratingStamina = null;
+    }
 }
