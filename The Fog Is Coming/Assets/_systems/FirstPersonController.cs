@@ -48,6 +48,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float minStaminaToSprint = 5;
     private float currentStamina;
     private Coroutine regeneratingStamina;
+    public static Action<float> OnStaminaChange;
 
     private float defaultYPos = 0;
     private float timer;
@@ -130,6 +131,11 @@ public class FirstPersonController : MonoBehaviour
     {
         if (isSprinting && currentInput != Vector2.zero) // Vector2.zero for check if player  moves
         {
+            if (regeneratingStamina != null)
+            {
+                StopCoroutine(regeneratingStamina);
+                regeneratingStamina = null;
+            }
             currentStamina -= staminaUseMultiplier * Time.deltaTime; // deltaTime for every second
 
             if (currentStamina < 0) 
@@ -137,10 +143,16 @@ public class FirstPersonController : MonoBehaviour
                 currentStamina = 0;
             }
 
+            OnStaminaChange?.Invoke(currentStamina);
+
             if (currentStamina <= 0)
             {
                 canSprint = false;
             }
+        }
+        if (!isSprinting && currentStamina < maxStamina && regeneratingStamina == null)
+        {
+            regeneratingStamina = StartCoroutine(RegenerateStamina());
         }
     }
 
@@ -171,6 +183,9 @@ public class FirstPersonController : MonoBehaviour
             {
                 currentStamina = maxStamina;
             }
+
+            OnStaminaChange?.Invoke(currentStamina);
+
             yield return timeToWait;
         }
         regeneratingStamina = null;
