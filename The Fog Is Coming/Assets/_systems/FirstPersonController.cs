@@ -15,6 +15,7 @@ public class FirstPersonController : MonoBehaviour
     [Header("Functional Options")]
     [SerializeField] private bool canSprint = true;
     [SerializeField] private bool isHeadBobbing = true;
+    [SerializeField] private bool useStamina = true;
 
 
     [Header("Controls")]
@@ -36,6 +37,16 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float walkBobAmount = 0.05f;
     [SerializeField] private float sprintBobSpeed = 18f;
     [SerializeField] private float sprintBobAmount = 0.1f;
+
+    [Header("Stamina Parameters")]
+    [SerializeField] private float maxStamina = 100;
+    [SerializeField] private float staminaUseMultiplier = 5;
+    [SerializeField] private float timeBeforeStaminaRegenStarts = 4.0f;
+    [SerializeField] private float staminaValueIncrement = 2;
+    [SerializeField] private float staminaTimeIncrement = 0.1f;
+    private float currentStamina;
+    private Coroutine regeneratingStamina;
+
     private float defaultYPos = 0;
     private float timer;
 
@@ -70,6 +81,11 @@ public class FirstPersonController : MonoBehaviour
         if (isHeadBobbing) 
         {
             HandleHeadBob();
+        }
+
+        if (useStamina)
+        {
+            HandleStamina()
         }
     }
 
@@ -106,6 +122,11 @@ public class FirstPersonController : MonoBehaviour
                 playerCamera.transform.localPosition.z
             );
         }
+    }
+
+    private void HandleStamina()
+    {
+        
     }
 
     private void AplyFinalMovements()
