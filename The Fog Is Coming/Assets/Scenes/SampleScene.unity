@@ -950,6 +950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canSprint: 1
   isHeadBobbing: 1
+  useStamina: 1
   sprintKey: 304
   walkSpeed: 3
   sprintSpeed: 6
@@ -959,9 +960,15 @@ MonoBehaviour:
   upLookLimit: 90
   downLookLimit: 90
   walkBobSpeed: 14
-  walkBobAmount: 0.05
+  walkBobAmount: 0.04
   sprintBobSpeed: 18
-  sprintBobAmount: 0.1
+  sprintBobAmount: 0.08
+  maxStamina: 100
+  staminaUseMultiplier: 10
+  timeBeforeStaminaRegenStarts: 5
+  staminaValueIncrement: 2
+  staminaTimeIncrement: 0.1
+  minStaminaToSprint: 5
 --- !u!143 &808098446
 CharacterController:
   m_ObjectHideFlags: 0
