@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,6 +45,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float timeBeforeStaminaRegenStarts = 4.0f;
     [SerializeField] private float staminaValueIncrement = 2;
     [SerializeField] private float staminaTimeIncrement = 0.1f;
+    [SerializeField] private float minStaminaToSprint = 5;
     private float currentStamina;
     private Coroutine regeneratingStamina;
 
@@ -126,9 +128,19 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleStamina()
     {
-        if (isSprinting)
+        if (isSprinting && currentInput != Vector2.zero) // Vector2.zero for check if player  moves
         {
+            currentStamina -= staminaUseMultiplier * Time.deltaTime; // deltaTime for every second
 
+            if (currentStamina < 0) 
+            {
+                currentStamina = 0;
+            }
+
+            if (currentStamina <= 0)
+            {
+                canSprint = false;
+            }
         }
     }
 
@@ -141,4 +153,26 @@ public class FirstPersonController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
+
+    private IEnumerator RegenerateStamina()
+    {
+        yield return new WaitForSeconds(timeBeforeStaminaRegenStarts);
+        WaitForSeconds timeToWait = new WaitForSeconds(staminaTimeIncrement);
+
+        while (currentStamina < maxStamina)
+        {
+            if (currentStamina >= minStaminaToSprint)
+            {
+                canSprint = true;
+            }
+            currentStamina += staminaValueIncrement;
+
+            if (currentStamina > maxStamina)
+            {
+                currentStamina = maxStamina;
+            }
+            yield return timeToWait;
+        }
+        regeneratingStamina = null;
+    }
 }
