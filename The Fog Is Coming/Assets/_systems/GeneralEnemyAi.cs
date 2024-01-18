@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GeneralEnemyAi : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public NavMeshAgent ai;
+    public List<Transform> destinations;
+    public Animator aiAnim;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
