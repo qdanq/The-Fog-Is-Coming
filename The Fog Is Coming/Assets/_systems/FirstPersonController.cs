@@ -85,7 +85,7 @@ public class FirstPersonController : MonoBehaviour
 
         if (useStamina)
         {
-            HandleStamina()
+            HandleStamina();
         }
     }
 
@@ -126,7 +126,10 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleStamina()
     {
-        
+        if (isSprinting)
+        {
+
+        }
     }
 
     private void AplyFinalMovements()
