@@ -716,6 +716,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7824753648676844136, guid: d43204824f12ca748a0f5508d1ecff67, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.21840818
+      objectReference: {fileID: 0}
+    - target: {fileID: -7824753648676844136, guid: d43204824f12ca748a0f5508d1ecff67, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.875
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d43204824f12ca748a0f5508d1ecff67, type: 3}
       propertyPath: m_Name
       value: Bed01
