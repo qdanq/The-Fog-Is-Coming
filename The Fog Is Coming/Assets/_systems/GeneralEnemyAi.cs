@@ -7,7 +7,7 @@ public class GeneralEnemyAi : MonoBehaviour
 {
     public NavMeshAgent ai;
     public List<Transform> destinations;
-    public float walkSpeed, chaseSpeed, idleTime;
+    public float walkSpeed, chaseSpeed, minIdleTime, maxIdletime, idleTime;
     public bool walking, chasing;
     public Transform player;
     Transform currentDest;
@@ -46,5 +46,13 @@ public class GeneralEnemyAi : MonoBehaviour
             }
 
         }   
+    }
+    IEnumerator stayIdle()
+    {
+        idleTime = Random.Range(minIdleTime, maxIdletime);
+        yield return new WaitForSeconds(idleTime);
+        randNum1 = Random.Range(0, destAmount);
+        currentDest = destinations[randNum1];
+
     }
 }
