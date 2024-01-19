@@ -8,8 +8,8 @@ public class GeneralEnemyAi : MonoBehaviour
     public NavMeshAgent ai;
     public List<Transform> destinations;
     public float walkSpeed, chaseSpeed, minIdleTime, maxIdletime, idleTime;
-    public float raycastDist, catchDist, minChaseTime, maxChaseTime, chaseTime;
-    // private float chaseTime;
+    public float raycastDist, catchDist, minChaseTime, maxChaseTime;
+    private float chaseTime;
     public bool isWalking, isChasing;
     public Transform player;
     Transform currentDest;
@@ -28,17 +28,17 @@ public class GeneralEnemyAi : MonoBehaviour
 
     void Update()
     {
-        Vector3 direction = player.position - transform.position.normalized;
+        Vector3 direction = (player.position - transform.position).normalized;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, direction, out hit, raycastDist))
+        if (Physics.Raycast(transform.position + rayCastOffset, direction, out hit, raycastDist))
         {
             if (hit.collider.gameObject.tag == "Player")
             {
-                StopCoroutine("stayIdle");
                 isWalking = false;
-                isChasing = true;
+                StopCoroutine("stayIdle");
                 StopCoroutine("chasePlayer");
                 StartCoroutine("chasePlayer");
+                isChasing = true;
             }
         }
 

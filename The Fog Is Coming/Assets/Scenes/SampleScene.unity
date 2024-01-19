@@ -2017,12 +2017,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 1677834725}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.66
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -2049,19 +2049,19 @@ MonoBehaviour:
   - {fileID: 1413226077}
   - {fileID: 1892512080}
   - {fileID: 1076455591}
-  walkSpeed: 2
-  chaseSpeed: 4
+  walkSpeed: 1
+  chaseSpeed: 3
   minIdleTime: 2
   maxIdletime: 6
   idleTime: 0
   raycastDist: 15
   catchDist: 3
-  minChaseTime: 5
-  maxChaseTime: 15
+  minChaseTime: 3
+  maxChaseTime: 8
+  chaseTime: 0
   isWalking: 0
   isChasing: 0
   player: {fileID: 808098444}
-  destAmount: 5
   rayCastOffset: {x: 0, y: 0, z: 0}
 --- !u!136 &1677834728
 CapsuleCollider:
