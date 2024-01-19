@@ -33,6 +33,16 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField, Range(1, 180)] private float upLookLimit = 80.0f;
     [SerializeField, Range(1, 180)] private float downLookLimit = 80.0f;
 
+    [Header("Health Parameters")]
+    [SerializeField] private float maxHealth = 100;
+    [SerializeField] private float timeBeforeRegenStarts = 6;
+    [SerializeField] private float healthValueIncrement = 1;
+    [SerializeField] private float healthTimeIncrement = 0.1f;
+    private float currentHealth = 100;
+    private Coroutine regeneratingHealth;
+
+
+
     [Header("Headbob Parameters")]
     [SerializeField] private float walkBobSpeed = 14f;
     [SerializeField] private float walkBobAmount = 0.05f;
