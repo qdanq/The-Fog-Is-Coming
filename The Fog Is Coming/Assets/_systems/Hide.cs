@@ -6,6 +6,9 @@ public class PlayerHide : MonoBehaviour
 {
     public GameObject hideText, stopHideText;
     public GameObject normalPlayer, hidingPlayer;
+    public GeneralEnemyAi monsterScript;
+    public Transform monsterTransform;
+    public float loseDist;
     bool isInteractable, isHiding;
     void OnTriggerStay(Collider other) 
     {
