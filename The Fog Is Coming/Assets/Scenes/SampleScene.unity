@@ -264,6 +264,9 @@ MonoBehaviour:
   stopHideText: {fileID: 855866737}
   normalPlayer: {fileID: 808098443}
   hidingPlayer: {fileID: 1188672764}
+  monsterScript: {fileID: 1677834727}
+  monsterTransform: {fileID: 1677834731}
+  loseDist: 0
 --- !u!1 &162513273
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +678,9 @@ MonoBehaviour:
   stopHideText: {fileID: 855866737}
   normalPlayer: {fileID: 808098443}
   hidingPlayer: {fileID: 1630407909}
+  monsterScript: {fileID: 1677834727}
+  monsterTransform: {fileID: 1677834731}
+  loseDist: 0
 --- !u!54 &397012659
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1754,7 +1760,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1485306808}
   - component: {fileID: 1485306810}
-  - component: {fileID: 1485306809}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -1777,14 +1782,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1188672765}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &1485306809
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485306807}
-  m_Enabled: 1
 --- !u!20 &1485306810
 Camera:
   m_ObjectHideFlags: 0
@@ -1905,7 +1902,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1654815798}
   - component: {fileID: 1654815800}
-  - component: {fileID: 1654815799}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -1928,14 +1924,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1630407911}
   m_LocalEulerAnglesHint: {x: 0, y: 106.036, z: 0}
---- !u!81 &1654815799
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1654815797}
-  m_Enabled: 1
 --- !u!20 &1654815800
 Camera:
   m_ObjectHideFlags: 0
@@ -2058,11 +2046,11 @@ MonoBehaviour:
   catchDist: 3
   minChaseTime: 3
   maxChaseTime: 8
-  chaseTime: 0
   isWalking: 0
   isChasing: 0
   player: {fileID: 808098444}
   rayCastOffset: {x: 0, y: 0, z: 0}
+  aiDist: 0
 --- !u!136 &1677834728
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2144,8 +2132,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677834725}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.36, y: 3.98, z: 25.65}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.3600006, y: 3.9799995, z: 25.650002}
   m_LocalScale: {x: 1.7950865, y: 1.7950865, z: 1.7950865}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2783,5 +2771,5 @@ SceneRoots:
   - {fileID: 448866478}
   - {fileID: 2048149138}
   - {fileID: 1334125246}
-  - {fileID: 1677834731}
   - {fileID: 363245579}
+  - {fileID: 1677834731}

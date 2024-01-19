@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerHide : MonoBehaviour
 {
     public GameObject hideText, stopHideText;
     public GameObject normalPlayer, hidingPlayer;
+    public GeneralEnemyAi monsterScript;
+    public Transform monsterTransform;
+    public float loseDist;
     bool isInteractable, isHiding;
     void OnTriggerStay(Collider other) 
     {
@@ -31,12 +35,20 @@ public class PlayerHide : MonoBehaviour
 
     void Update()
     {
-        if(isInteractable == true)
+        if(isInteractable)
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
                 hideText.SetActive(false);
                 hidingPlayer.SetActive(true);
+                float dist = Vector3.Distance(monsterTransform.position, normalPlayer.transform.position);
+                if (dist > loseDist)
+                {
+                    if (monsterScript.isChasing)
+                    {
+                        monsterScript.stopChase();
+                    }
+                }
             
                 stopHideText.SetActive(true);
                 isHiding = true;
