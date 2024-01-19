@@ -14,7 +14,7 @@ public class GeneralEnemyAi : MonoBehaviour
     public Transform player;
     Transform currentDest;
     Vector3 dest;
-    int randNum1, randNum2;
+    int randNum;
     public Vector3 rayCastOffset;
 
 
@@ -22,8 +22,8 @@ public class GeneralEnemyAi : MonoBehaviour
     void Start()
     {
         isWalking = true;
-        randNum1 = Random.Range(0, destinations.Count);
-        currentDest = destinations[randNum1];
+        randNum = Random.Range(0, destinations.Count);
+        currentDest = destinations[randNum];
     }
 
     void Update()
@@ -61,18 +61,9 @@ public class GeneralEnemyAi : MonoBehaviour
             ai.speed = walkSpeed;
             if (ai.remainingDistance <= ai.stoppingDistance)
             {
-                randNum2 = Random.Range(0, 2);
-                if (randNum2 == 0)
-                {
-                    randNum1 = Random.Range(0, destinations.Count);
-                    currentDest = destinations[randNum1];
-                }
-                else 
-                {
-                    StopCoroutine("stayIdle");
-                    StartCoroutine("stayIdle");
-                    isWalking = false;
-                }
+                StopCoroutine("stayIdle");
+                StartCoroutine("stayIdle");
+                isWalking = false;
             }
 
         }   
@@ -81,8 +72,8 @@ public class GeneralEnemyAi : MonoBehaviour
     {
         idleTime = Random.Range(minIdleTime, maxIdletime);
         yield return new WaitForSeconds(idleTime);
-        randNum1 = Random.Range(0, destinations.Count);
-        currentDest = destinations[randNum1];
+        randNum = Random.Range(0, destinations.Count);
+        currentDest = destinations[randNum];
         isWalking = true;
 
     }
@@ -93,7 +84,7 @@ public class GeneralEnemyAi : MonoBehaviour
         yield return new WaitForSeconds(chaseTime);
         isWalking = true;
         isChasing = false;
-        randNum1 = Random.Range(0, destinations.Count);
-        currentDest = destinations[randNum1];
+        randNum = Random.Range(0, destinations.Count);
+        currentDest = destinations[randNum];
     }
 }
