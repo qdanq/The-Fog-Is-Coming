@@ -7,13 +7,15 @@ public class GeneralEnemyAi : MonoBehaviour
 {
     public NavMeshAgent ai;
     public List<Transform> destinations;
-    public float walkSpeed, chaseSpeed, minIdleTime, maxIdletime, idleTime;
+    public float walkSpeed, chaseSpeed, minIdleTime, maxIdletime, idleTime, raycastDist;
     public bool walking, chasing;
     public Transform player;
     Transform currentDest;
     Vector3 dest;
     int randNum1, randNum2;
     public int destAmount;
+    public Vector3 rayCastOffset;
+
 
 
     void Start()
@@ -25,6 +27,17 @@ public class GeneralEnemyAi : MonoBehaviour
 
     void Update()
     {
+        Vector3 direction = player.position - transform.position.normalized;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + rayCastOffset, direction, out hit, raycastDist))
+        {
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                
+            }
+        }
+
+
         if (walking == true)
         {
             dest = currentDest.position;
