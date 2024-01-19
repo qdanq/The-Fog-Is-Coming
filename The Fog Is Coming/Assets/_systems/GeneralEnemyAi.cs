@@ -7,21 +7,44 @@ public class GeneralEnemyAi : MonoBehaviour
 {
     public NavMeshAgent ai;
     public List<Transform> destinations;
-    public float walkSpeed, chaseSpeed, idleTime, destinationAmount;
+    public float walkSpeed, chaseSpeed, idleTime;
     public bool walking, chasing;
     public Transform player;
     Transform currentDest;
     Vector3 dest;
-    int randNum;
-    
+    int randNum1, randNum2, destAmount;
+
 
     void Start()
     {
-        
+        walking = true;
+        randNum1 = Random.Range(0, destAmount);
+        currentDest = destinations[randNum1];
     }
 
     void Update()
     {
-        
+        if (walking == true)
+        {
+            dest = currentDest.position;
+            ai.destination = dest;            
+            ai.speed = walkSpeed;
+            if (ai.remainingDistance <= ai.stoppingDistance)
+            {
+                randNum2 = Random.Range(0, 2);
+                if (randNum2 == 0)
+                {
+                    randNum1 = Random.Range(0, destAmount);
+                    currentDest = destinations[randNum1];
+                }
+                else 
+                {
+                    StopCoroutine("stayIdle");
+                    StartCoroutine("stayIdle");
+                    walking = false;
+                }
+            }
+
+        }   
     }
 }
