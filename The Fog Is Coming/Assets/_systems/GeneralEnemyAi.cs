@@ -16,6 +16,7 @@ public class GeneralEnemyAi : MonoBehaviour
     Vector3 dest;
     int randNum;
     public Vector3 rayCastOffset;
+    public float aiDist;
 
 
 
@@ -30,6 +31,7 @@ public class GeneralEnemyAi : MonoBehaviour
     {
         Vector3 direction = (player.position - transform.position).normalized;
         RaycastHit hit;
+        aiDist = Vector3.Distance(player.position, this.transform.position);
         if (Physics.Raycast(transform.position + rayCastOffset, direction, out hit, raycastDist))
         {
             if (hit.collider.gameObject.tag == "Player")
@@ -47,7 +49,7 @@ public class GeneralEnemyAi : MonoBehaviour
             dest = player.position;
             ai.destination = dest;
             ai.speed = chaseSpeed;
-            if (ai.remainingDistance <= catchDist)
+            if (aiDist <= catchDist)
             {
                 player.gameObject.SetActive(false);
                 isChasing = false;
