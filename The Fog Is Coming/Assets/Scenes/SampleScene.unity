@@ -264,6 +264,9 @@ MonoBehaviour:
   stopHideText: {fileID: 855866737}
   normalPlayer: {fileID: 808098443}
   hidingPlayer: {fileID: 1188672764}
+  monsterScript: {fileID: 1677834727}
+  monsterTransform: {fileID: 0}
+  loseDist: 0
 --- !u!1 &162513273
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +678,9 @@ MonoBehaviour:
   stopHideText: {fileID: 855866737}
   normalPlayer: {fileID: 808098443}
   hidingPlayer: {fileID: 1630407909}
+  monsterScript: {fileID: 1677834727}
+  monsterTransform: {fileID: 0}
+  loseDist: 0
 --- !u!54 &397012659
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1711,6 +1717,7 @@ Transform:
   - {fileID: 1806809593}
   - {fileID: 784252205}
   - {fileID: 162513274}
+  - {fileID: 1677834731}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1413226076
@@ -2058,7 +2065,6 @@ MonoBehaviour:
   catchDist: 3
   minChaseTime: 3
   maxChaseTime: 8
-  chaseTime: 0
   isWalking: 0
   isChasing: 0
   player: {fileID: 808098444}
@@ -2144,12 +2150,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677834725}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.36, y: 3.98, z: 25.65}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -20.379524, y: 64.41598, z: 95.05264}
   m_LocalScale: {x: 1.7950865, y: 1.7950865, z: 1.7950865}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1334125246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1697748974
 GameObject:
@@ -2783,5 +2789,4 @@ SceneRoots:
   - {fileID: 448866478}
   - {fileID: 2048149138}
   - {fileID: 1334125246}
-  - {fileID: 1677834731}
   - {fileID: 363245579}
