@@ -8,7 +8,8 @@ public class GeneralEnemyAi : MonoBehaviour
     public NavMeshAgent ai;
     public List<Transform> destinations;
     public float walkSpeed, chaseSpeed, minIdleTime, maxIdletime, idleTime;
-    public float raycastDist, catchDist, minChaseTime, maxChaseTime, chaseTime;
+    public float raycastDist, catchDist, minChaseTime, maxChaseTime;
+    private float chaseTime;
     public bool isWalking, isChasing;
     public Transform player;
     Transform currentDest;
