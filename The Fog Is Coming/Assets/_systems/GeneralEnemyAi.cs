@@ -12,7 +12,8 @@ public class GeneralEnemyAi : MonoBehaviour
     public Transform player;
     Transform currentDest;
     Vector3 dest;
-    int randNum1, randNum2, destAmount;
+    int randNum1, randNum2; 
+    public int destAmount;
 
 
     void Start()
