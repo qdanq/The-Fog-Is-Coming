@@ -8,14 +8,13 @@ public class GeneralEnemyAi : MonoBehaviour
     public NavMeshAgent ai;
     public List<Transform> destinations;
     public float walkSpeed, chaseSpeed, minIdleTime, maxIdletime, idleTime;
-    public float raycastDist, catchDist, minChaseTime, maxChaseTime;
-    private float chaseTime;
+    public float raycastDist, catchDist, minChaseTime, maxChaseTime, chaseTime;
+    // private float chaseTime;
     public bool isWalking, isChasing;
     public Transform player;
     Transform currentDest;
     Vector3 dest;
     int randNum1, randNum2;
-    public int destAmount;
     public Vector3 rayCastOffset;
 
 
@@ -23,7 +22,7 @@ public class GeneralEnemyAi : MonoBehaviour
     void Start()
     {
         isWalking = true;
-        randNum1 = Random.Range(0, destAmount);
+        randNum1 = Random.Range(0, destinations.Count);
         currentDest = destinations[randNum1];
     }
 
@@ -31,15 +30,15 @@ public class GeneralEnemyAi : MonoBehaviour
     {
         Vector3 direction = player.position - transform.position.normalized;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + rayCastOffset, direction, out hit, raycastDist))
+        if (Physics.Raycast(transform.position, direction, out hit, raycastDist))
         {
             if (hit.collider.gameObject.tag == "Player")
             {
-                isWalking = false;
                 StopCoroutine("stayIdle");
+                isWalking = false;
+                isChasing = true;
                 StopCoroutine("chasePlayer");
                 StartCoroutine("chasePlayer");
-                isChasing = true;
             }
         }
 
@@ -65,7 +64,7 @@ public class GeneralEnemyAi : MonoBehaviour
                 randNum2 = Random.Range(0, 2);
                 if (randNum2 == 0)
                 {
-                    randNum1 = Random.Range(0, destAmount);
+                    randNum1 = Random.Range(0, destinations.Count);
                     currentDest = destinations[randNum1];
                 }
                 else 
@@ -82,7 +81,7 @@ public class GeneralEnemyAi : MonoBehaviour
     {
         idleTime = Random.Range(minIdleTime, maxIdletime);
         yield return new WaitForSeconds(idleTime);
-        randNum1 = Random.Range(0, destAmount);
+        randNum1 = Random.Range(0, destinations.Count);
         currentDest = destinations[randNum1];
         isWalking = true;
 
@@ -92,9 +91,9 @@ public class GeneralEnemyAi : MonoBehaviour
     {   
         chaseTime = Random.Range(minChaseTime, maxChaseTime);
         yield return new WaitForSeconds(chaseTime);
-        isChasing = false;
-        randNum1 = Random.Range(0, destAmount);
-        currentDest = destinations[randNum1];
         isWalking = true;
+        isChasing = false;
+        randNum1 = Random.Range(0, destinations.Count);
+        currentDest = destinations[randNum1];
     }
 }
