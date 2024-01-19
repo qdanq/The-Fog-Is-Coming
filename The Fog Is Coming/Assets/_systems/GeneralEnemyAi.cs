@@ -54,6 +54,7 @@ public class GeneralEnemyAi : MonoBehaviour
         yield return new WaitForSeconds(idleTime);
         randNum1 = Random.Range(0, destAmount);
         currentDest = destinations[randNum1];
+        walking = true;
 
     }
 }
