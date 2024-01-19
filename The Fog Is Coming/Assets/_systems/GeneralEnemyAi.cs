@@ -68,6 +68,15 @@ public class GeneralEnemyAi : MonoBehaviour
 
         }   
     }
+
+    public void stopChase()
+    {
+        isWalking = true;
+        isChasing = false;
+        StopCoroutine("chasePlayer");
+        randNum = Random.Range(0, destinations.Count);
+        currentDest = destinations[randNum];
+    }
     IEnumerator stayIdle()
     {
         idleTime = Random.Range(minIdleTime, maxIdletime);
