@@ -190,7 +190,14 @@ public class FirstPersonController : MonoBehaviour
 
     private void KillPlayer()
     {
+        currentHealth = 0;
 
+        if (regeneratingHealth != null)
+        {
+            StopCoroutine(regeneratingHealth);
+        }
+
+        print("Dead");
     }
 
     private IEnumerator RegenerateStamina()
