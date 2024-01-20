@@ -177,7 +177,7 @@ public class FirstPersonController : MonoBehaviour
     private void ApplyDamage(float dmg)
     {
         currentHealth -= dmg;
-        if (currentHealth <=)
+        if (currentHealth <= 0)
         {
             KillPlayer();
         } 
