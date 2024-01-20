@@ -176,7 +176,16 @@ public class FirstPersonController : MonoBehaviour
 
     private void ApplyDamage(float dmg)
     {
-
+        currentHealth -= dmg;
+        if (currentHealth <=)
+        {
+            KillPlayer();
+        } 
+        else if (regeneratingHealth != null)
+        {
+            StopCoroutine(regeneratingHealth);
+        }
+        regeneratingHealth = StartCoroutine(RegenerateHealth());
     }
 
     private void KillPlayer()
@@ -211,6 +220,20 @@ public class FirstPersonController : MonoBehaviour
 
     private IEnumerator RegenerateHealth()
     {
+        yield return new WaitForSeconds(timeBeforeRegenStarts);
+        WaitForSeconds timeToWait = new WaitForSeconds(healthTimeIncrement);
 
+        while (currentHealth < maxHealth)
+        {
+            currentHealth += healthValueIncrement;
+
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            yield return timeToWait;
+        }
+
+        regeneratingHealth = null;
     }
 }
