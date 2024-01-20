@@ -41,8 +41,6 @@ public class FirstPersonController : MonoBehaviour
     private float currentHealth = 100;
     private Coroutine regeneratingHealth;
 
-
-
     [Header("Headbob Parameters")]
     [SerializeField] private float walkBobSpeed = 14f;
     [SerializeField] private float walkBobAmount = 0.05f;
@@ -137,6 +135,7 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
+
     private void HandleStamina()
     {
         if (isSprinting && currentInput != Vector2.zero) // Vector2.zero for check if player  moves
@@ -175,6 +174,15 @@ public class FirstPersonController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
+    private void ApplyDamage(float dmg)
+    {
+
+    }
+
+    private void KillPlayer()
+    {
+
+    }
 
     private IEnumerator RegenerateStamina()
     {
@@ -199,5 +207,10 @@ public class FirstPersonController : MonoBehaviour
             yield return timeToWait;
         }
         regeneratingStamina = null;
+    }
+
+    private IEnumerator RegenerateHealth()
+    {
+
     }
 }
