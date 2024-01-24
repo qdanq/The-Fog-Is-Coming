@@ -33,6 +33,12 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField, Range(1, 180)] private float upLookLimit = 80.0f;
     [SerializeField, Range(1, 180)] private float downLookLimit = 80.0f;
 
+    [Header("Crouch Parameters")]
+    [SerializeField] private float standHeight = 1f;
+    [SerializeField] private float crouchHeight = 0.5f;
+    [SerializeField] private float timeToCrouch = 0.25f;
+    private bool isCrouching = false;
+
     [Header("Health Parameters")]
     [SerializeField] private float maxHealth = 100;
     [SerializeField] private float timeBeforeRegenStarts = 6;
