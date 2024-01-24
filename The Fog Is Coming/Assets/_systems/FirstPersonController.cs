@@ -12,6 +12,8 @@ public class FirstPersonController : MonoBehaviour
         } = true;
     
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
+    private bool ShouldCrouch => Input.GetKeyDown(crouchKey) && !duringCrouch 
+        && characterController.isGrounded;
 
     [Header("Functional Options")]
     [SerializeField] private bool canSprint = true;
