@@ -21,6 +21,7 @@ public class FirstPersonController : MonoBehaviour
 
     [Header("Controls")]
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
+    [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
 
     [Header("Movement Parameters")]
     [SerializeField] private float walkSpeed = 3.0f;
@@ -37,7 +38,10 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float standHeight = 1f;
     [SerializeField] private float crouchHeight = 0.5f;
     [SerializeField] private float timeToCrouch = 0.25f;
+    [SerializeField] private Vector3 crouchCenter = new Vector3(0, 0.5f, 0);
+    [SerializeField] private Vector3 standCenter = new Vector3(0, 0, 0);
     private bool isCrouching = false;
+    private bool duringCrouch = false;
 
     [Header("Health Parameters")]
     [SerializeField] private float maxHealth = 100;
