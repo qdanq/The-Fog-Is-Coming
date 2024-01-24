@@ -6,25 +6,42 @@ using UnityEngine.EventSystems;
 
 public class FirstPersonController : MonoBehaviour
 {
+    private float defaultYPos = 0;
+    private float timer;
+
+
+    private Camera playerCamera;
+    private CharacterController characterController;
+
+    private Vector3 moveDirection;
+    private Vector2 currentInput;
+
+    private float rotationX = 0;
+
     public bool CanMove { 
         get;
         private set;
         } = true;
     
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
+    private bool AbleCrouch => Input.GetKeyDown(crouchKey) && !duringCrouch 
+        && characterController.isGrounded;
 
     [Header("Functional Options")]
     [SerializeField] private bool canSprint = true;
+    [SerializeField] private bool canCrouch = true;
     [SerializeField] private bool isHeadBobbing = true;
     [SerializeField] private bool useStamina = true;
 
 
     [Header("Controls")]
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
+    [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
 
     [Header("Movement Parameters")]
     [SerializeField] private float walkSpeed = 3.0f;
     [SerializeField] private float sprintSpeed = 6.0f;
+    [SerializeField] private float crouchSpeed = 1.5f;
     [SerializeField] private float gravity = 30.0f; // MB make ragdolls instead of this construction
 
     [Header("Look Parameters")]
@@ -32,6 +49,16 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField, Range(1, 10)] private float lookSpeedY = 2.0f; // Must be accessible from options
     [SerializeField, Range(1, 180)] private float upLookLimit = 80.0f;
     [SerializeField, Range(1, 180)] private float downLookLimit = 80.0f;
+
+    [Header("Crouch Parameters")]
+    private float standHeight;
+    [SerializeField] private float crouchHeight = 0.5f;
+    [SerializeField] private float timeToCrouch = 0.25f;
+    [SerializeField] private Vector3 crouchCenter = new Vector3(0, 0.5f, 0);
+    [SerializeField] private Vector3 standCenter = new Vector3(0, 0, 0);
+
+    private bool isCrouching = false;
+    private bool duringCrouch = false;
 
     [Header("Health Parameters")]
     [SerializeField] private float maxHealth = 100;
@@ -61,17 +88,7 @@ public class FirstPersonController : MonoBehaviour
     private Coroutine regeneratingStamina;
     public static Action<float> OnStaminaChange;
 
-    private float defaultYPos = 0;
-    private float timer;
-
-
-    private Camera playerCamera;
-    private CharacterController characterController;
-
-    private Vector3 moveDirection;
-    private Vector2 currentInput;
-
-    private float rotationX = 0;
+    
 
     void Start()
     {
@@ -80,6 +97,7 @@ public class FirstPersonController : MonoBehaviour
         defaultYPos = playerCamera.transform.localPosition.y;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        standHeight = characterController.height;
     }
 
     private void OnEnable() {
@@ -108,12 +126,18 @@ public class FirstPersonController : MonoBehaviour
         {
             HandleStamina();
         }
+
+        if (canCrouch)
+        {
+            HandleCrouch();
+        }
     }
 
     private void HandleMovementInput()
     {
-        currentInput = new Vector2((isSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Vertical"), 
-        (isSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Horizontal"));
+        currentInput = new Vector2((isSprinting ? sprintSpeed : isCrouching ? crouchSpeed : walkSpeed)
+             * Input.GetAxis("Vertical"), 
+        (isSprinting ? sprintSpeed : isCrouching ? crouchSpeed : walkSpeed) * Input.GetAxis("Horizontal"));
 
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x)
@@ -175,6 +199,14 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
+    private void HandleCrouch()
+    {
+        if (AbleCrouch)
+        {
+            StartCoroutine(CrouchStand());
+        }
+    }
+
     private void AplyFinalMovements()
     {
         if (!characterController.isGrounded) 
@@ -209,7 +241,7 @@ public class FirstPersonController : MonoBehaviour
         }
 
         print("Dead");
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         
     }
 
@@ -256,5 +288,35 @@ public class FirstPersonController : MonoBehaviour
         }
 
         regeneratingHealth = null;
+    }
+
+    private IEnumerator CrouchStand()
+    {
+        if (isCrouching && Physics.Raycast(playerCamera.transform.position, Vector3.up, 2f)) // 2f is difference between crouchHeight and standHeight
+        {
+            yield break;
+        }
+        duringCrouch = true;
+
+        float timeElapsed = 0;
+        float targetHeight = isCrouching ? standHeight : crouchHeight;
+        float currentHeight = characterController.height;
+        Vector3 targetCenter = isCrouching ? standCenter : crouchCenter;
+        Vector3 currentCenter = characterController.center;
+
+        while (timeToCrouch > timeElapsed)
+        {
+            characterController.height = Mathf.Lerp(currentHeight,  targetHeight, timeElapsed/timeToCrouch);
+            characterController.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed/timeToCrouch);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        characterController.height = targetHeight;
+        characterController.center = targetCenter;
+        
+        isCrouching = !isCrouching;
+
+        duringCrouch = false;
     }
 }

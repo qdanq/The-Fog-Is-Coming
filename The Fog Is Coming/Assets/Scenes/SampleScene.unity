@@ -1411,16 +1411,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canSprint: 1
+  canCrouch: 1
   isHeadBobbing: 1
   useStamina: 1
   sprintKey: 304
+  crouchKey: 306
   walkSpeed: 3
   sprintSpeed: 6
+  crouchSpeed: 1.5
   gravity: 30
   lookSpeedX: 2
   lookSpeedY: 2
   upLookLimit: 90
   downLookLimit: 90
+  crouchHeight: 1
+  timeToCrouch: 0.25
+  crouchCenter: {x: 0, y: 0.5, z: 0}
+  standCenter: {x: 0, y: 0, z: 0}
+  maxHealth: 100
+  timeBeforeRegenStarts: 6
+  healthValueIncrement: 1
+  healthTimeIncrement: 0.1
   walkBobSpeed: 14
   walkBobAmount: 0.04
   sprintBobSpeed: 18
