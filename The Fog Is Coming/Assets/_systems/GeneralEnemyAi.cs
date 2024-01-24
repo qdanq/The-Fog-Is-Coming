@@ -51,7 +51,7 @@ public class GeneralEnemyAi : MonoBehaviour
             ai.speed = chaseSpeed;
             if (aiDist <= catchDist)
             {
-                player.gameObject.SetActive(false);
+                FirstPersonController.OnTakeDamage(100); // Make health(sanity) loose a bit while enemy chasing
                 isChasing = false;
             }
         }
@@ -93,6 +93,7 @@ public class GeneralEnemyAi : MonoBehaviour
     {   
         chaseTime = Random.Range(minChaseTime, maxChaseTime);
         yield return new WaitForSeconds(chaseTime);
+        FirstPersonController.OnTakeDamage(15); // Make health(sanity) loose a bit while enemy chasing
         isWalking = true;
         isChasing = false;
         randNum = Random.Range(0, destinations.Count);

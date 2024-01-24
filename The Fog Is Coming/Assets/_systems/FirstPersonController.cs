@@ -33,6 +33,17 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField, Range(1, 180)] private float upLookLimit = 80.0f;
     [SerializeField, Range(1, 180)] private float downLookLimit = 80.0f;
 
+    [Header("Health Parameters")]
+    [SerializeField] private float maxHealth = 100;
+    [SerializeField] private float timeBeforeRegenStarts = 6;
+    [SerializeField] private float healthValueIncrement = 1;
+    [SerializeField] private float healthTimeIncrement = 0.1f;
+    private float currentHealth = 100;
+    private Coroutine regeneratingHealth;
+    public static Action<float> OnTakeDamage;
+    public static Action<float> OnDamage;
+    public static Action<float> OnHeal;
+
     [Header("Headbob Parameters")]
     [SerializeField] private float walkBobSpeed = 14f;
     [SerializeField] private float walkBobAmount = 0.05f;
@@ -69,6 +80,13 @@ public class FirstPersonController : MonoBehaviour
         defaultYPos = playerCamera.transform.localPosition.y;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void OnEnable() {
+        OnTakeDamage += ApplyDamage;
+    }
+    private void OnDisable() {
+        OnTakeDamage -= ApplyDamage;
     }
 
     void Update()
@@ -127,6 +145,7 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
+
     private void HandleStamina()
     {
         if (isSprinting && currentInput != Vector2.zero) // Vector2.zero for check if player  moves
@@ -165,6 +184,34 @@ public class FirstPersonController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
+    private void ApplyDamage(float dmg)
+    {
+        currentHealth -= dmg;
+        OnDamage?.Invoke(currentHealth);
+        if (currentHealth <= 0)
+        {
+            KillPlayer();
+        } 
+        else if (regeneratingHealth != null)
+        {
+            StopCoroutine(regeneratingHealth);
+        }
+        regeneratingHealth = StartCoroutine(RegenerateHealth());
+    }
+
+    private void KillPlayer()
+    {
+        currentHealth = 0;
+
+        if (regeneratingHealth != null)
+        {
+            StopCoroutine(regeneratingHealth);
+        }
+
+        print("Dead");
+        gameObject.SetActive(false);
+        
+    }
 
     private IEnumerator RegenerateStamina()
     {
@@ -189,5 +236,25 @@ public class FirstPersonController : MonoBehaviour
             yield return timeToWait;
         }
         regeneratingStamina = null;
+    }
+
+    private IEnumerator RegenerateHealth()
+    {
+        yield return new WaitForSeconds(timeBeforeRegenStarts);
+        WaitForSeconds timeToWait = new WaitForSeconds(healthTimeIncrement);
+
+        while (currentHealth < maxHealth)
+        {
+            currentHealth += healthValueIncrement;
+
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            OnHeal?.Invoke(currentHealth);
+            yield return timeToWait;
+        }
+
+        regeneratingHealth = null;
     }
 }
