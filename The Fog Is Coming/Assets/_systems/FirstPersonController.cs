@@ -12,7 +12,7 @@ public class FirstPersonController : MonoBehaviour
         } = true;
     
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
-    private bool ShouldCrouch => Input.GetKeyDown(crouchKey) && !duringCrouch 
+    private bool AbleCrouch => Input.GetKeyDown(crouchKey) && !duringCrouch 
         && characterController.isGrounded;
 
     [Header("Functional Options")]
@@ -195,7 +195,10 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleCrouch()
     {
-
+        if (AbleCrouch)
+        {
+            StartCoroutine(CrouchStand());
+        }
     }
 
     private void AplyFinalMovements()
@@ -279,5 +282,10 @@ public class FirstPersonController : MonoBehaviour
         }
 
         regeneratingHealth = null;
+    }
+
+    private IEnumerator CrouchStand()
+    {
+        yield return
     }
 }
