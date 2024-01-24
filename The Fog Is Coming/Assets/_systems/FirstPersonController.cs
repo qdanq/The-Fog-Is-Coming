@@ -241,7 +241,7 @@ public class FirstPersonController : MonoBehaviour
         }
 
         print("Dead");
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         
     }
 
@@ -292,6 +292,10 @@ public class FirstPersonController : MonoBehaviour
 
     private IEnumerator CrouchStand()
     {
+        if (isCrouching && Physics.Raycast(playerCamera.transform.position, Vector3.up, 2f)) // 2f is difference between crouchHeight and standHeight
+        {
+            yield break;
+        }
         duringCrouch = true;
 
         float timeElapsed = 0;
