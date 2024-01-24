@@ -15,6 +15,7 @@ public class FirstPersonController : MonoBehaviour
 
     [Header("Functional Options")]
     [SerializeField] private bool canSprint = true;
+    [SerializeField] private bool canCrouch = true;
     [SerializeField] private bool isHeadBobbing = true;
     [SerializeField] private bool useStamina = true;
 
@@ -118,6 +119,11 @@ public class FirstPersonController : MonoBehaviour
         {
             HandleStamina();
         }
+
+        if (canCrouch)
+        {
+            HandleCrouch();
+        }
     }
 
     private void HandleMovementInput()
@@ -183,6 +189,11 @@ public class FirstPersonController : MonoBehaviour
         {
             regeneratingStamina = StartCoroutine(RegenerateStamina());
         }
+    }
+
+    private void HandleCrouch()
+    {
+
     }
 
     private void AplyFinalMovements()
