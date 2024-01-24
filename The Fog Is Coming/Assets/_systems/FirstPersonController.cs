@@ -6,6 +6,18 @@ using UnityEngine.EventSystems;
 
 public class FirstPersonController : MonoBehaviour
 {
+    private float defaultYPos = 0;
+    private float timer;
+
+
+    private Camera playerCamera;
+    private CharacterController characterController;
+
+    private Vector3 moveDirection;
+    private Vector2 currentInput;
+
+    private float rotationX = 0;
+
     public bool CanMove { 
         get;
         private set;
@@ -38,11 +50,12 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField, Range(1, 180)] private float downLookLimit = 80.0f;
 
     [Header("Crouch Parameters")]
-    [SerializeField] private float standHeight = 1f;
+    private float standHeight;
     [SerializeField] private float crouchHeight = 0.5f;
     [SerializeField] private float timeToCrouch = 0.25f;
     [SerializeField] private Vector3 crouchCenter = new Vector3(0, 0.5f, 0);
     [SerializeField] private Vector3 standCenter = new Vector3(0, 0, 0);
+
     private bool isCrouching = false;
     private bool duringCrouch = false;
 
@@ -74,17 +87,7 @@ public class FirstPersonController : MonoBehaviour
     private Coroutine regeneratingStamina;
     public static Action<float> OnStaminaChange;
 
-    private float defaultYPos = 0;
-    private float timer;
-
-
-    private Camera playerCamera;
-    private CharacterController characterController;
-
-    private Vector3 moveDirection;
-    private Vector2 currentInput;
-
-    private float rotationX = 0;
+    
 
     void Start()
     {
@@ -93,6 +96,7 @@ public class FirstPersonController : MonoBehaviour
         defaultYPos = playerCamera.transform.localPosition.y;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        standHeight = characterController.height;
     }
 
     private void OnEnable() {
@@ -294,13 +298,18 @@ public class FirstPersonController : MonoBehaviour
         Vector3 targetCenter = isCrouching ? standCenter : crouchCenter;
         Vector3 currentCenter = characterController.center;
 
-        while (timeToCrouch < timeElapsed)
+        while (timeToCrouch > timeElapsed)
         {
             characterController.height = Mathf.Lerp(currentHeight,  targetHeight, timeElapsed/timeToCrouch);
             characterController.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed/timeToCrouch);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+
+        characterController.height = targetHeight;
+        characterController.center = targetCenter;
+        
+        isCrouching = !isCrouching;
 
         duringCrouch = false;
     }
