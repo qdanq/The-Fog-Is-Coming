@@ -209,6 +209,8 @@ public class FirstPersonController : MonoBehaviour
         }
 
         print("Dead");
+        gameObject.SetActive(false);
+        
     }
 
     private IEnumerator RegenerateStamina()
