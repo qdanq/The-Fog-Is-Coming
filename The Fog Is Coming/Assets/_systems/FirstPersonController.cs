@@ -40,6 +40,9 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float healthTimeIncrement = 0.1f;
     private float currentHealth = 100;
     private Coroutine regeneratingHealth;
+    public static Action<float> OnTakeDamage;
+    public static Action<float> OnDamage;
+    public static Action<float> OnHeal;
 
     [Header("Headbob Parameters")]
     [SerializeField] private float walkBobSpeed = 14f;
@@ -77,6 +80,13 @@ public class FirstPersonController : MonoBehaviour
         defaultYPos = playerCamera.transform.localPosition.y;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void OnEnable() {
+        OnTakeDamage += ApplyDamage;
+    }
+    private void OnDisable() {
+        OnTakeDamage -= ApplyDamage;
     }
 
     void Update()
@@ -177,6 +187,7 @@ public class FirstPersonController : MonoBehaviour
     private void ApplyDamage(float dmg)
     {
         currentHealth -= dmg;
+        OnDamage?.Invoke(currentHealth);
         if (currentHealth <= 0)
         {
             KillPlayer();
@@ -238,6 +249,7 @@ public class FirstPersonController : MonoBehaviour
             {
                 currentHealth = maxHealth;
             }
+            OnHeal?.Invoke(currentHealth);
             yield return timeToWait;
         }
 
