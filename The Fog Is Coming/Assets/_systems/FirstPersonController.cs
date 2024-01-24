@@ -286,6 +286,22 @@ public class FirstPersonController : MonoBehaviour
 
     private IEnumerator CrouchStand()
     {
-        yield return
+        duringCrouch = true;
+
+        float timeElapsed = 0;
+        float targetHeight = isCrouching ? standHeight : crouchHeight;
+        float currentHeight = characterController.height;
+        Vector3 targetCenter = isCrouching ? standCenter : crouchCenter;
+        Vector3 currentCenter = characterController.center;
+
+        while (timeToCrouch < timeElapsed)
+        {
+            characterController.height = Mathf.Lerp(currentHeight,  targetHeight, timeElapsed/timeToCrouch);
+            characterController.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed/timeToCrouch);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        duringCrouch = false;
     }
 }
