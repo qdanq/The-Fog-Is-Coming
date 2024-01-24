@@ -41,6 +41,7 @@ public class FirstPersonController : MonoBehaviour
     [Header("Movement Parameters")]
     [SerializeField] private float walkSpeed = 3.0f;
     [SerializeField] private float sprintSpeed = 6.0f;
+    [SerializeField] private float crouchSpeed = 1.5f;
     [SerializeField] private float gravity = 30.0f; // MB make ragdolls instead of this construction
 
     [Header("Look Parameters")]
@@ -134,7 +135,8 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleMovementInput()
     {
-        currentInput = new Vector2((isSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Vertical"), 
+        currentInput = new Vector2((isSprinting ? sprintSpeed : isCrouching ? crouchSpeed : walkSpeed)
+             * Input.GetAxis("Vertical"), 
         (isSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Horizontal"));
 
         float moveDirectionY = moveDirection.y;
