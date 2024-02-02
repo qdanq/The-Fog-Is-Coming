@@ -23,7 +23,7 @@ public class FirstPersonController : MonoBehaviour
         private set;
         } = true;
     
-    private bool isSprinting => canSprint && Input.GetKey(sprintKey);
+    private bool isSprinting => canSprint && Input.GetKey(sprintKey) && Input.GetAxis("Vertical") > 0;
     private bool AbleCrouch => Input.GetKeyDown(crouchKey) && !duringCrouch 
         && characterController.isGrounded;
 
@@ -32,9 +32,12 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private bool canCrouch = true;
     [SerializeField] private bool isHeadBobbing = true;
     [SerializeField] private bool useStamina = true;
+    float moveMode;
 
 
     [Header("Controls")]
+    [SerializeField] private KeyCode moveForward = KeyCode.W;
+    [SerializeField] private KeyCode moveBackward = KeyCode.S;
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
     [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
 
@@ -135,16 +138,16 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleMovementInput()
     {
-        currentInput = new Vector2((isSprinting ? sprintSpeed : isCrouching ? crouchSpeed : walkSpeed)
-             * Input.GetAxis("Vertical"), 
-        (isSprinting ? sprintSpeed : isCrouching ? crouchSpeed : walkSpeed) * Input.GetAxis("Horizontal"));
+        moveMode = isCrouching ? crouchSpeed : isSprinting ? sprintSpeed : walkSpeed;
+
+        currentInput = new Vector2(moveMode * Input.GetAxis("Vertical"), moveMode
+         * Input.GetAxis("Horizontal"));
 
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x)
         + (transform.TransformDirection(Vector3.right) * currentInput.y);
-        
+        moveDirection = moveDirection.normalized * Mathf.Clamp(moveDirection.magnitude, 0, moveMode);
         moveDirection.y = moveDirectionY;
-
     }
     private void HandleMouseLock()
     {
@@ -316,6 +319,7 @@ public class FirstPersonController : MonoBehaviour
         characterController.center = targetCenter;
         
         isCrouching = !isCrouching;
+        canSprint = !canSprint;
 
         duringCrouch = false;
     }
