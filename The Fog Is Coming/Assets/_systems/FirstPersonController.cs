@@ -32,6 +32,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private bool canCrouch = true;
     [SerializeField] private bool isHeadBobbing = true;
     [SerializeField] private bool useStamina = true;
+    float moveMode;
 
 
     [Header("Controls")]
@@ -135,15 +136,19 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleMovementInput()
     {
-        currentInput = new Vector2((isSprinting ? sprintSpeed : isCrouching ? crouchSpeed : walkSpeed)
-             * Input.GetAxis("Vertical"), 
-        (isSprinting ? sprintSpeed : isCrouching ? crouchSpeed : walkSpeed) * Input.GetAxis("Horizontal"));
+
+        moveMode = isSprinting ? sprintSpeed : isCrouching ? crouchSpeed : walkSpeed;
+
+        currentInput = new Vector2(moveMode * Input.GetAxis("Vertical"), moveMode
+         * Input.GetAxis("Horizontal"));
 
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x)
         + (transform.TransformDirection(Vector3.right) * currentInput.y);
         
         moveDirection.y = moveDirectionY;
+        moveDirection = moveDirection.normalized * Mathf.Clamp(moveDirection.magnitude, 0, moveMode);
+
 
     }
     private void HandleMouseLock()
