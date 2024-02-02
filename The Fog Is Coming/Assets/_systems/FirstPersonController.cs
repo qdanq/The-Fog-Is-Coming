@@ -319,6 +319,7 @@ public class FirstPersonController : MonoBehaviour
         characterController.center = targetCenter;
         
         isCrouching = !isCrouching;
+        canSprint = !canSprint;
 
         duringCrouch = false;
     }
