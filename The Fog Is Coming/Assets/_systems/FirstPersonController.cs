@@ -145,9 +145,9 @@ public class FirstPersonController : MonoBehaviour
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x)
         + (transform.TransformDirection(Vector3.right) * currentInput.y);
+        moveDirection = moveDirection.normalized * Mathf.Clamp(moveDirection.magnitude, 0, moveMode);
         
         moveDirection.y = moveDirectionY;
-        moveDirection = moveDirection.normalized * Mathf.Clamp(moveDirection.magnitude, 0, moveMode);
 
 
     }

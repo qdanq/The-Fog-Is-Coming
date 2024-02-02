@@ -262,7 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hideText: {fileID: 1697748974}
   stopHideText: {fileID: 855866737}
-  normalPlayer: {fileID: 0}
+  normalPlayer: {fileID: 808098443}
   hidingPlayer: {fileID: 1188672764}
   monsterScript: {fileID: 1677834727}
   monsterTransform: {fileID: 1677834731}
@@ -676,7 +676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hideText: {fileID: 1697748974}
   stopHideText: {fileID: 855866737}
-  normalPlayer: {fileID: 0}
+  normalPlayer: {fileID: 808098443}
   hidingPlayer: {fileID: 1630407909}
   monsterScript: {fileID: 1677834727}
   monsterTransform: {fileID: 1677834731}
@@ -2059,7 +2059,7 @@ MonoBehaviour:
   maxChaseTime: 8
   isWalking: 0
   isChasing: 0
-  player: {fileID: 0}
+  player: {fileID: 808098444}
   rayCastOffset: {x: 0, y: 0, z: 0}
   aiDist: 0
 --- !u!136 &1677834728
