@@ -36,6 +36,8 @@ public class FirstPersonController : MonoBehaviour
 
 
     [Header("Controls")]
+    [SerializeField] private KeyCode moveForward = KeyCode.W;
+    [SerializeField] private KeyCode moveBackward = KeyCode.S;
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
     [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
 
@@ -146,10 +148,7 @@ public class FirstPersonController : MonoBehaviour
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x)
         + (transform.TransformDirection(Vector3.right) * currentInput.y);
         moveDirection = moveDirection.normalized * Mathf.Clamp(moveDirection.magnitude, 0, moveMode);
-        
         moveDirection.y = moveDirectionY;
-
-
     }
     private void HandleMouseLock()
     {
