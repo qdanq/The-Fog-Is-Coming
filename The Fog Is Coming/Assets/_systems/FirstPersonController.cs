@@ -23,7 +23,7 @@ public class FirstPersonController : MonoBehaviour
         private set;
         } = true;
     
-    private bool isSprinting => canSprint && Input.GetKey(sprintKey) && !Input.GetKey(reverseKey);
+    private bool isSprinting => canSprint && Input.GetKey(sprintKey) && Input.GetAxis("Vertical") > 0;
     private bool AbleCrouch => Input.GetKeyDown(crouchKey) && !duringCrouch 
         && characterController.isGrounded;
 
@@ -37,7 +37,6 @@ public class FirstPersonController : MonoBehaviour
 
     [Header("Controls")]
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
-    KeyCode reverseKey = KeyCode.S;
     [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
 
     [Header("Movement Parameters")]
