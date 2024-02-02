@@ -136,19 +136,30 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
+        private Rigidbody rb;
+    public float maxVelocityChange = 10f;
     private void HandleMovementInput()
     {
-
+        
         moveMode = isCrouching ? crouchSpeed : isSprinting ? sprintSpeed : walkSpeed;
 
         currentInput = new Vector2(moveMode * Input.GetAxis("Vertical"), moveMode
          * Input.GetAxis("Horizontal"));
 
-        float moveDirectionY = moveDirection.y;
-        moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x)
-        + (transform.TransformDirection(Vector3.right) * currentInput.y);
-        moveDirection = moveDirection.normalized * Mathf.Clamp(moveDirection.magnitude, 0, moveMode);
-        moveDirection.y = moveDirectionY;
+        Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        targetVelocity = transform.TransformDirection(targetVelocity) * walkSpeed;
+        Vector3 velocity = rb.velocity;
+        Vector3 velocityChange = (targetVelocity - velocity);
+        velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+        velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+        velocityChange.y = 0;
+        rb.AddForce(velocityChange, ForceMode.VelocityChange);
+
+//        float moveDirectionY = moveDirection.y;
+  //      moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x)
+    //    + (transform.TransformDirection(Vector3.right) * currentInput.y);
+      //  moveDirection = moveDirection.normalized * Mathf.Clamp(moveDirection.magnitude, 0, moveMode);
+        //moveDirection.y = moveDirectionY;
     }
     private void HandleMouseLock()
     {
