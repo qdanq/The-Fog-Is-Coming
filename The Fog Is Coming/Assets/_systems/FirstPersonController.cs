@@ -36,8 +36,8 @@ public class FirstPersonController : MonoBehaviour
 
 
     [Header("Controls")]
-    [SerializeField] private KeyCode moveForward = KeyCode.W;
-    [SerializeField] private KeyCode moveBackward = KeyCode.S;
+    //[SerializeField] private KeyCode moveForward = KeyCode.W;
+    //[SerializeField] private KeyCode moveBackward = KeyCode.S;
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
     [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
 
