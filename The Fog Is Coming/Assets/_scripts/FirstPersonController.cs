@@ -41,6 +41,7 @@ public class FirstPersonController : MonoBehaviour
     //[SerializeField] private KeyCode moveBackward = KeyCode.S;
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
     [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
+    [SerializeField] private KeyCode interactKey = KeyCode.E;
 
     [Header("Movement Parameters")]
     [SerializeField] private float walkSpeed = 3.0f;
@@ -124,7 +125,6 @@ public class FirstPersonController : MonoBehaviour
             HandleMovementInput();
             HandleMouseLock();
 
-            AplyFinalMovements();
         }
 
         if (isHeadBobbing) 
@@ -146,6 +146,8 @@ public class FirstPersonController : MonoBehaviour
             HandleInteractionCheck();
             HandleInteractionInput();
         }
+        
+        AplyFinalMovements();
     }
 
     private void HandleMovementInput()
@@ -224,12 +226,18 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleInteractionCheck()
     {
-
+        if (Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDist))
+        {
+            
+        }
     }
 
     private void HandleInteractionInput()
     {
-
+        if (Input.GetKeyDown(interactKey) && currentInteraction != null && Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDist, interactionLayer))
+        {
+            currentInteraction.OnInteract();
+        }
     }
     private void AplyFinalMovements()
     {
