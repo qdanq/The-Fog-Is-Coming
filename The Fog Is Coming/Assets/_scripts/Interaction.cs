@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interaction : MonoBehaviour
+public abstract class Interaction : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public abstract void OnInteract();
+    public abstract void OnFocus();
+    public abstract void OnLoseFocus();
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         

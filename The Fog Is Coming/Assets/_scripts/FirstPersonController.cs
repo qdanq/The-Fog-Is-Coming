@@ -91,6 +91,12 @@ public class FirstPersonController : MonoBehaviour
     private Coroutine regeneratingStamina;
     public static Action<float> OnStaminaChange;
 
+    [Header("Interaction")]
+    [SerializeField] private Vector3 interactionRayPoint = default;
+    [SerializeField] private float interactionDist = default;
+    [SerializeField] private LayerMask interactionLayer = default;
+    private Interaction currentInteraction; 
+
     
 
     void Start()
