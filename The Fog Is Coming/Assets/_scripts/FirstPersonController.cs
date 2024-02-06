@@ -219,16 +219,26 @@ public class FirstPersonController : MonoBehaviour
     private void HandleCrouch()
     {
         if (AbleCrouch)
-        {
             StartCoroutine(CrouchStand());
-        }
     }
 
     private void HandleInteractionCheck()
     {
         if (Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDist))
         {
-            
+            if (hit.collider.gameObject.layer == 3 && currentInteraction == null 
+            || hit.collider.gameObject.GetInstanceID() != currentInteraction.GetInstanceID())
+            {
+                hit.collider.TryGetComponent(out currentInteraction);
+
+                if (currentInteraction)
+                    currentInteraction.OnFocus();
+            }
+        }
+        else if (currentInteraction)
+        {
+            currentInteraction.OnLoseFocus();
+            currentInteraction = null;
         }
     }
 
