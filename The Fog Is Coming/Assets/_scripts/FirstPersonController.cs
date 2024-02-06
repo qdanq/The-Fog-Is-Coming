@@ -32,6 +32,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private bool canCrouch = true;
     [SerializeField] private bool isHeadBobbing = true;
     [SerializeField] private bool useStamina = true;
+    [SerializeField] private bool canInteract = true;
     float moveMode;
 
 
@@ -140,6 +141,11 @@ public class FirstPersonController : MonoBehaviour
         {
             HandleCrouch();
         }
+        if (canInteract)
+        {
+            HandleInteractionCheck();
+            HandleInteractionInput();
+        }
     }
 
     private void HandleMovementInput()
@@ -216,6 +222,15 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
+    private void HandleInteractionCheck()
+    {
+
+    }
+
+    private void HandleInteractionInput()
+    {
+
+    }
     private void AplyFinalMovements()
     {
         if (!characterController.isGrounded) 
