@@ -227,7 +227,7 @@ public class FirstPersonController : MonoBehaviour
         if (Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDist))
         {
             if (hit.collider.gameObject.layer == 3 && currentInteraction == null 
-            || hit.collider.gameObject.GetInstanceID() != currentInteraction.GetInstanceID())
+            || hit.collider.gameObject.GetInstanceID() != currentInteraction.gameObject.GetInstanceID())
             {
                 hit.collider.TryGetComponent(out currentInteraction);
 
