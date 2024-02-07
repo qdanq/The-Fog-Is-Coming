@@ -24,9 +24,13 @@ public class Doors : Interaction
         {
             isOpen = !isOpen;
 
-            Vector3 doorTransformDi = transform.TransformDirection(Vector3.forward);
+            Vector3 doorTransformDir = transform.TransformDirection(Vector3.forward);
 
-            Vector3 playerTransformDir;
+            Vector3 playerTransformDir = FirstPersonController.instance.transform.position - transform.position;
+            float dot = Vector3.Dot(doorTransformDir, playerTransformDir);
+
+            anim.SetFloat("dot", dot);
+            anim.SetBool("isOpen", isOpen);
         }
     }
 
