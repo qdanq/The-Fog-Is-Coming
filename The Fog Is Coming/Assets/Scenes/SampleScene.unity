@@ -2266,6 +2266,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: door
       objectReference: {fileID: 0}
+    - target: {fileID: 3165136455333538568, guid: 4f5a828aa52c05a458faebd3abc8a7d6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3666236655599962129, guid: 4f5a828aa52c05a458faebd3abc8a7d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.664
+      objectReference: {fileID: 0}
     - target: {fileID: 7111715319380502501, guid: 4f5a828aa52c05a458faebd3abc8a7d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.281355
@@ -2306,8 +2314,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    - target: {fileID: 8213008998905096387, guid: 4f5a828aa52c05a458faebd3abc8a7d6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8213008998905096387, guid: 4f5a828aa52c05a458faebd3abc8a7d6, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 8467172630263395021, guid: 4f5a828aa52c05a458faebd3abc8a7d6, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f5a828aa52c05a458faebd3abc8a7d6, type: 3}
