@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Doors : MonoBehaviour
+public class Doors : Interaction
 {
-    // Start is called before the first frame update
-    void Start()
+    private bool isOpen = false;
+    private bool canBeInteractedWith = false;
+    public override void OnFocus()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnInteract()
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnLoseFocus()
+    {
+
     }
 }
