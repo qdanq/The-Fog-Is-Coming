@@ -99,10 +99,12 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private LayerMask interactionLayer = default;
     private Interaction currentInteraction; 
 
-    
+    public static FirstPersonController instance;    
 
-    void Start()
+    void Awake()
     {
+        instance = this;
+        
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();        
         defaultYPos = playerCamera.transform.localPosition.y;
