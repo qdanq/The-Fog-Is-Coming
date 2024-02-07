@@ -226,8 +226,7 @@ public class FirstPersonController : MonoBehaviour
     {
         if (Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDist))
         {
-            if (hit.collider.gameObject.layer == 3 && currentInteraction == null 
-            || hit.collider.gameObject.GetInstanceID() != currentInteraction.gameObject.GetInstanceID())
+            if (hit.collider.gameObject.layer == 3 && (currentInteraction == null || hit.collider.gameObject.GetInstanceID() != currentInteraction.gameObject.GetInstanceID()))
             {
                 hit.collider.TryGetComponent(out currentInteraction);
 
@@ -241,7 +240,6 @@ public class FirstPersonController : MonoBehaviour
             currentInteraction = null;
         }
     }
-
     private void HandleInteractionInput()
     {
         if (Input.GetKeyDown(interactKey) && currentInteraction != null && Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDist, interactionLayer))
