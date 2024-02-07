@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class Doors : Interaction
 {
     private bool isOpen = false;
-    private bool canBeInteractedWith = false;
+    private bool canBeInteractedWith = true;
     private Animator anim;
 
     private void Start()
