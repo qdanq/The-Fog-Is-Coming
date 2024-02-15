@@ -1123,7 +1123,7 @@ MonoBehaviour:
   sprintBobAmount: 0.08
   maxStamina: 100
   staminaUseMultiplier: 10
-  timeBeforeStaminaRegenStarts: 5
+  timeBeforeStaminaRegenStarts: 4
   staminaValueIncrement: 2
   staminaTimeIncrement: 0.1
   minStaminaToSprint: 5
@@ -1466,8 +1466,8 @@ MonoBehaviour:
   idleTime: 0
   raycastDist: 15
   catchDist: 3
-  minChaseTime: 3
-  maxChaseTime: 8
+  minChaseTime: 5
+  maxChaseTime: 10
   isWalking: 0
   isChasing: 0
   player: {fileID: 808098444}

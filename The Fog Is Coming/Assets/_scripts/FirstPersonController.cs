@@ -23,7 +23,7 @@ public class FirstPersonController : MonoBehaviour
         private set;
         } = true;
     
-    private bool isSprinting => canSprint && Input.GetKey(sprintKey) && Input.GetAxis("Vertical") > 0;
+    static public bool isSprinting => FirstPersonController.instance.canSprint && Input.GetKey(FirstPersonController.instance.sprintKey) && Input.GetAxis("Vertical") > 0;
     private bool AbleCrouch => Input.GetKeyDown(crouchKey) && !duringCrouch 
         && characterController.isGrounded;
 
@@ -62,7 +62,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private Vector3 crouchCenter = new Vector3(0, 0.5f, 0);
     [SerializeField] private Vector3 standCenter = new Vector3(0, 0, 0);
 
-    private bool isCrouching = false;
+    static public bool isCrouching = false;
     private bool duringCrouch = false;
 
     [Header("Health Parameters")]

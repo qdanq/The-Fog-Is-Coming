@@ -17,8 +17,7 @@ public class GeneralEnemyAi : MonoBehaviour
     int randNum;
     public Vector3 rayCastOffset;
     public float aiDist;
-
-
+    FirstPersonController playerScript;    
 
     void Start()
     {
@@ -29,6 +28,10 @@ public class GeneralEnemyAi : MonoBehaviour
 
     void Update()
     {
+        if (FirstPersonController.isCrouching)
+        {
+            
+        }
         Vector3 direction = (player.position - transform.position).normalized;
         RaycastHit hit;
         aiDist = Vector3.Distance(player.position, this.transform.position);
