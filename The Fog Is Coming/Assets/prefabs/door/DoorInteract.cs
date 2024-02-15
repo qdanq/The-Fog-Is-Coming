@@ -41,6 +41,14 @@ public class Doors : Interaction
         
     }
 
+    private void Animator_LockInteraction()
+    {
+        canBeInteractedWith = false;
+    }
+    private void Animator_UnlockInteraction()
+    {
+        canBeInteractedWith = true;
+    }
     private IEnumerator AutoClose()
     {
         while (isOpen)
@@ -55,4 +63,5 @@ public class Doors : Interaction
             } 
         }
     }
+
 }
