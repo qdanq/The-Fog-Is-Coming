@@ -90,6 +90,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float staminaTimeIncrement = 0.1f;
     [SerializeField] private float minStaminaToSprint = 5;
     private float currentStamina = 100;
+    private bool isIncrement = false;
     private Coroutine regeneratingStamina;
     public static Action<float> OnStaminaChange;
 
@@ -158,6 +159,15 @@ public class FirstPersonController : MonoBehaviour
 
         currentInput = new Vector2(moveMode * Input.GetAxis("Vertical"), moveMode
          * Input.GetAxis("Horizontal"));
+        
+        if (currentInput == new Vector2(0, 0))
+        {
+            isIncrement = true;
+        } 
+        else 
+        {
+            isIncrement = false;
+        }
 
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x)
@@ -298,7 +308,16 @@ public class FirstPersonController : MonoBehaviour
             {
                 canSprint = true;
             }
+
+            if (isIncrement)
+            {
+                staminaValueIncrement *= 2;
+            }
             currentStamina += staminaValueIncrement;
+            if (isIncrement)
+            {
+                staminaValueIncrement /= 2;
+            }
 
             if (currentStamina > maxStamina)
             {
