@@ -30,7 +30,11 @@ public class GeneralEnemyAi : MonoBehaviour
     {
         if (FirstPersonController.isCrouching)
         {
-            
+            raycastDist /= 2;
+        }
+        if (FirstPersonController.isSprinting)
+        {
+            raycastDist *= 2;
         }
         Vector3 direction = (player.position - transform.position).normalized;
         RaycastHit hit;
@@ -72,6 +76,15 @@ public class GeneralEnemyAi : MonoBehaviour
             }
 
         }   
+
+        if (FirstPersonController.isCrouching)
+        {
+            raycastDist *= 2;
+        }
+        if (FirstPersonController.isSprinting)
+        {
+            raycastDist /= 2;
+        }
     }
 
     public void stopChase()
