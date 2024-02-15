@@ -31,11 +31,28 @@ public class Doors : Interaction
 
             anim.SetFloat("dot", dot);
             anim.SetBool("isOpen", isOpen);
+
+            StartCoroutine(AutoClose());
         }
     }
 
     public override void OnLoseFocus()
     {
+        
+    }
 
+    private IEnumerator AutoClose()
+    {
+        while (isOpen)
+        {
+            yield return new WaitForSeconds(8);
+
+            if (Vector3.Distance(transform.position, FirstPersonController.instance.transform.position) > 5)
+            {
+                isOpen = false; 
+                anim.SetFloat("dot", 0);
+                anim.SetBool("isOpen", isOpen);
+            } 
+        }
     }
 }
