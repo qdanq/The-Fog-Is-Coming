@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class FirstPersonController : MonoBehaviour
 {
+    public static FirstPersonController instance;    
     private float defaultYPos = 0;
     private float timer;
 
@@ -100,7 +101,6 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private LayerMask interactionLayer = default;
     private Interaction currentInteraction; 
 
-    public static FirstPersonController instance;    
 
     void Awake()
     {
