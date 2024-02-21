@@ -5,6 +5,7 @@ using UnityEngine;
 public class FogDamage : MonoBehaviour
 {
     bool isEntered = false;
+    public int healthLossPerSecond = 1;
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
@@ -23,10 +24,10 @@ public class FogDamage : MonoBehaviour
     }
     private IEnumerator DealDamage()
     {
-        yield return new WaitForSeconds(1);
         while(isEntered)
         {
-            FirstPersonController.OnTakeDamage(1);
+            FirstPersonController.OnTakeDamage(healthLossPerSecond);
+            yield return new WaitForSeconds(1);
         }
     }
 }
