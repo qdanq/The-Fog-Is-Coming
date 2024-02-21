@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class FogDamage : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void OnTriggerEnter(Collider other)
     {
-        
+        if(other.tag == "Player")
+        {
+            print("enter");
+        }
     }
-
-    // Update is called once per frame
-    void Update()
+    void OnTriggerExit(Collider other)
     {
-        
+        if(other.tag == "Player")
+        {
+            print("exit");
+        }
     }
 }
