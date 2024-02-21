@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class FogDamage : MonoBehaviour
 {
-    void OnTriggerEnter(Collider other)
+    bool isEntered = false;
+    private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            print("enter");
+            isEntered = true;
+            StartCoroutine(DealDamage());
         }
     }
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if(other.tag == "Player")
         {
-            print("exit");
+            isEntered = false;
+            StopCoroutine(DealDamage());
+        }
+    }
+    private IEnumerator DealDamage()
+    {
+        yield return new WaitForSeconds(1);
+        while(isEntered)
+        {
+            FirstPersonController.OnTakeDamage(1);
         }
     }
 }
