@@ -123,6 +123,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: c5128a35cdb1ca54db7ea67cefa587bd, type: 2}
+--- !u!1001 &122342421
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 74ba1ba0039c17649960706589d48e00, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.7273588
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 74ba1ba0039c17649960706589d48e00, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.44
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 74ba1ba0039c17649960706589d48e00, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 24.17059
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 74ba1ba0039c17649960706589d48e00, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 74ba1ba0039c17649960706589d48e00, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 74ba1ba0039c17649960706589d48e00, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 74ba1ba0039c17649960706589d48e00, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 74ba1ba0039c17649960706589d48e00, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 74ba1ba0039c17649960706589d48e00, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 74ba1ba0039c17649960706589d48e00, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 74ba1ba0039c17649960706589d48e00, type: 3}
+      propertyPath: m_Name
+      value: ogre mixamo
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 74ba1ba0039c17649960706589d48e00, type: 3}
 --- !u!1 &162513273
 GameObject:
   m_ObjectHideFlags: 0
@@ -2475,3 +2532,4 @@ SceneRoots:
   - {fileID: 420583842}
   - {fileID: 3871172049174646820}
   - {fileID: 1323663746}
+  - {fileID: 122342421}
