@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ogre mixamo
       objectReference: {fileID: 0}
+    - target: {fileID: 2086807704710249266, guid: 74ba1ba0039c17649960706589d48e00, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 36a3f4be45693094f9a17294a9f7ab2a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
